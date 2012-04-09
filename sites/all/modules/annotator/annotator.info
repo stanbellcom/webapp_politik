@@ -1,0 +1,3 @@
+name = Annotator
+description = A module allowing to add notes documents
+core = 7.x

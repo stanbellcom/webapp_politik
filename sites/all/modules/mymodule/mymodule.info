@@ -1,0 +1,5 @@
+name = "My Module"
+description = "Example module for Ajaxed Paging and Sorting of Tables in Drupal 7."
+core = "7.x"
+
+version = "7.x-1.0"

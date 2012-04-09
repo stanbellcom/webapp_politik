@@ -1,0 +1,18 @@
+Metadata-Version: 1.0
+Name: annotator
+Version: 0.7.6
+Summary: Inline web annotation application and middleware using javascript and WSGI
+Home-page: http://okfnlabs.org/annotator/
+Author: Rufus Pollock and Nick Stenning (Open Knowledge Foundation)
+Author-email: annotator@okfn.org
+License: MIT
+Download-URL: https://github.com/okfn/annotator-store
+Description: Inline javascript-based web annotation library. Package includeds a database-backed annotation store with RESTFul (WSGI-powered) web-interface.
+Keywords: annotation web javascript
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python

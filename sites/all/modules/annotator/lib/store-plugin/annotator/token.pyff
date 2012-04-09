@@ -1,0 +1,32 @@
+import datetime
+import jwt
+
+# Replace these with your details
+CONSUMER_KEY = '573dac7c2c1a42698e70ae44cd27a76b'
+CONSUMER_SECRET = '899556ee-35ae-4ff3-996e-281afb77f67b'
+
+# Only change this if you're sure you know what you're doing
+CONSUMER_TTL = 86400
+
+ZERO = datetime.timedelta(0)
+class Utc(datetime.tzinfo):
+    def utcoffset(self, dt):
+        return ZERO
+
+    def tzname(self, dt):
+        return "UTC"
+
+    def dst(self, dt):
+        return ZERO
+UTC = Utc()
+
+def generate_token(user_id):
+    return jwt.encode({
+      'consumerKey': CONSUMER_KEY,
+      'userId': user_id,
+      'issuedAt': _now().isoformat(),
+      'ttl': CONSUMER_TTL
+    }, CONSUMER_SECRET)
+
+def _now():
+    return datetime.datetime.now(UTC).replace(microsecond=0)

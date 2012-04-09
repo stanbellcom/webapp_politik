@@ -1,0 +1,17 @@
+annotator/__init__.py
+annotator/annotation.py
+annotator/auth.py
+annotator/authz.py
+annotator/elasticsearch.py
+annotator/store.py
+annotator.egg-info/PKG-INFO
+annotator.egg-info/SOURCES.txt
+annotator.egg-info/dependency_links.txt
+annotator.egg-info/requires.txt
+annotator.egg-info/top_level.txt
+tests/__init__.py
+tests/helpers.py
+tests/test_annotation.py
+tests/test_auth.py
+tests/test_authz.py
+tests/test_store.py
