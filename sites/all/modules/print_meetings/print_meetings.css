@@ -1,0 +1,36 @@
+.no-pad {
+padding: 0px 0px 0px 0px;
+}
+
+td.inside {
+border-style:solid;
+border-width:1px;
+padding: 1px;
+}
+
+td.number {
+width: 5%;
+}
+
+td.content {
+width: 90%;
+}
+
+table {
+width: 100%;
+font-size:10px;
+}
+
+.valign_top {
+vertical-align: top;
+}
+
+th.con_center{
+text-align:center;
+border-style:solid;
+border-width:1px;
+}
+
+td.gray{
+background-color: #cdc9c9
+}

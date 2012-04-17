@@ -1,0 +1,261 @@
+<?php
+function print_meetings_menu() {
+    $items = array();
+  
+    $items['meetings/print'] = array(
+      'title' => 'MØDEKALENDER '. date('Y'),
+      'type' => MENU_CALLBACK,
+      'page callback' => '_print_meetings_callback',
+      'access arguments' => array('access content')
+    );
+  
+    return $items;
+}
+
+function _print_meetings_callback() {        
+    drupal_add_css(drupal_get_path('module', 'print_meetings') . '/print_meetings.css');
+  
+    return drupal_get_form('_print_meetings_form');      
+}
+
+
+function _print_meetings_form($form, &$form_state){
+    $from_month = 1;
+    if (!empty($form_state['values']['from_month'])){
+        $from_month =  $form_state['values']['from_month'];
+    } else if (!empty($_GET['from_month'])){
+        $from_month = $_GET['from_month'];
+    }
+    
+    $to_month  = 6;
+    if (!empty($form_state['values']['to_month'])){
+        $to_month =  $form_state['values']['to_month'];
+    } else if (!empty($_GET['to_month'])){
+        $to_month = $_GET['to_month'];
+    }
+        
+    //excludig form from display on print page
+    if (empty($_GET['print'])){
+        
+        $form[] = array(
+            '#markup' => '<table class="form"><tr><td>'
+        );
+        
+        $form['submit_1_half'] = array(
+        '#type' => 'submit',
+        '#submit' => array('_print_meetings_form_submit_1_half'),
+        '#value' => t('Hent tabelen for det første halv år'),
+        );
+        
+        $form[] = array(
+            '#markup' => '</td><td>'
+        );
+        
+        $form['submit_2_half'] = array(
+        '#type' => 'submit',
+        '#submit' => array('_print_meetings_form_submit_2_half'),
+        '#value' => t('Hent tabelen for det sidste halv år'),
+        );
+        
+        
+        //$form['from_month'] = array(
+        //   '#type' => 'select',
+        //   '#title' => t('Fra Måned'),
+        //   '#options' => print_meetings_get_months(),
+        //   '#default_value' => $from_month, 
+        //);
+        //$form[] = array(
+        //    '#markup' => '</td><td>'
+        //);
+        //
+        //$form['to_month'] = array(
+        //   '#type' => 'select',
+        //   '#title' => t('Til Måned'),
+        //   '#options' => print_meetings_get_months(),
+        //   '#default_value' => $to_month, 
+        //);
+        //
+        //$form[] = array(
+        //    '#markup' => '</td><td>'
+        //);
+        //
+        //$form['submit'] = array(
+        //'#type' => 'submit',
+        //'#submit' => array('_print_meetings_form_submit'),
+        //'#value' => t('Hent tabelen'),
+        //);
+        
+        $form[] = array(
+            '#markup' => '</td><td>'
+        );
+        
+        $link = $GLOBALS['base_path'].'?q=printpdf/meetings/print&from_month='.$from_month.'&to_month='.$to_month.'&print=true';
+        //$link = 'http://google.com';
+        $form[] = array(
+            '#markup' => "<input type='button' value='Print' class='form-submit' onClick='window.open(\"".$link."\")' />",
+        );
+        
+        $form[] = array(
+            '#markup' => '</td></tr></table>'
+        );
+    
+    }
+    else {
+        $form[] =  array(
+        '#markup' => "<h1>MØDEKALENDER ".date('Y')."</h2>",
+        );    
+    }
+    
+    $form['result'] =  array(
+    '#markup' => _print_meetings_get_table($from_month,$to_month),
+    );
+
+    return $form;
+}
+
+function _print_meetings_form_submit_1_half($form, &$form_state) {
+    $form_state['rebuild'] = TRUE;
+    $form_state['values']['from_month']= 1;
+    $form_state['values']['to_month']= 6;
+}
+
+function _print_meetings_form_submit_2_half($form, &$form_state) {
+    $form_state['rebuild'] = TRUE;
+    $form_state['values']['from_month']= 7;
+    $form_state['values']['to_month']= 12;
+}
+
+function _print_meetings_get_table($from_month,$to_month){    
+    //selecting the node of type meetings
+    $query = db_select('node', 'n');
+    $query->join('field_data_field_date', 'f', 'n.nid = f.entity_id');
+    $results = $query->fields('n',array('nid'))
+    ->condition('f.field_date_value', date('Y').'-'.$from_month.'-01 00:00:00','>=')//selecting meetings from the from_month
+    ->condition('f.field_date_value', date('Y').'-'.$to_month.'-31 23:59:59','<=')//selecting meetings up to the to_month
+    ->orderBy('f.field_date_value','ASC')
+    ->execute()
+    ->fetchCol();
+    
+    //loading meetings fields
+    $meetings = array();
+    if (!empty($results))
+        $meetings = node_load_multiple($results, array('type' => array('meeting')));
+    
+    //if (($to_month - $from_month) < 6)
+        return _print_meetings_get_six_month_data($from_month, $to_month, $meetings);
+    //else
+    //    return _print_meetings_get_twelve_month_data($from_month, $to_month, $meetings);
+}
+
+function _print_meetings_get_six_month_data($from_month, $to_month, $meetings){
+    //headers 
+    $html = "<table>";
+    $html .= print_meetings_generate_month_headers($from_month,$to_month);
+    //body - generating selected month
+    $html .= print_meetings_generate_month($from_month, $to_month, $meetings);
+    //end of body
+    $html .= "</table>";
+    
+    return $html;
+}
+
+//is not used because of the bug in pdf maker - cannot make two pages
+function _print_meetings_get_twelve_month_data($from_month, $to_month, $meetings){
+    $half = floor(($to_month + $from_month)/2);
+    
+    //headers 1 half
+    $html = "<table>";
+    $html .= print_meetings_generate_month_headers($from_month,$half);
+    //body 1 - generating selected month 1 half
+    $html .= print_meetings_generate_month($from_month, $half, $meetings);
+    //end of body 1
+    $html .= "</table>";
+    
+    //headers 2 half
+    $html .= "<table class='print_second_page'>";
+    $html .= print_meetings_generate_month_headers($half+1,$to_month);
+    //body 2 - generating selected month 2 half
+    $html .= print_meetings_generate_month($half+1, $to_month, $meetings);
+    //end of body 2
+    $html .= "</table>";
+    
+    return $html;
+}
+
+function print_meetings_generate_month_headers($from_month,$to_month){
+    $months_names = print_meetings_get_months();
+    $html = "<tr>";
+    for ($month = $from_month; $month <= $to_month; $month++){
+        $html .= "<th class='con_center'>".$months_names[$month]."</th>";
+    }    
+    $html .= "</tr>";
+    
+    return $html;
+}
+
+function print_meetings_generate_month($from_month, $to_month, $meetings){
+    $html = "<tr>";
+    for ($month = $from_month; $month <= $to_month; $month++){
+        $html .= "<td width='16.6%' class='no-pad valign_top'>";
+        $html .= "<table>";
+        for ($i=1; $i<= cal_days_in_month(CAL_GREGORIAN, $month, date('Y')); $i++)
+        {
+          $html .= "<tr>";
+          $html .= "<td class='inside number"._mark_weekend_gray($month,$i)."'>".$i."</td>";
+          $html .= "<td class='inside content"._mark_weekend_gray($month,$i)."'"._add_col_span($month,$i).">";
+          //filling with the content
+          foreach ($meetings as $met){
+              if (substr($met->field_date['und'][0]['value'], 0,10) === date('Y-m-d',mktime(0, 0, 0, $month, $i, date("Y")))){
+                  $html .= $met->field_meeting_abbr['und'][0]['value'].", ";
+              }
+          }
+          //end of content
+          $html .= "</td>";
+          $html .= _mark_week_start($month,$i);
+          $html .= "</tr>";
+        }
+        $html .= "</table>";
+        $html .= "</td>";
+    }
+    $html .= "</tr>";
+    
+    return $html;
+}
+
+function _mark_weekend_gray($month,$day) {
+    if (date('N',mktime(0, 0, 0, $month, $day, date('Y'))) >= 6)
+        return ' gray ';
+    else
+        return '';
+}
+
+function _mark_week_start($month,$day) {
+    if (date('N',mktime(0, 0, 0, $month, $day, date('Y'))) == 1)
+        return '<td class="inside number">'.date('W',mktime(0, 0, 0, $month, $day, date('Y'))).'</td>';
+    else
+        return '';
+}
+
+function _add_col_span($month,$day) {
+    if (date('N',mktime(0, 0, 0, $month, $day, date('Y'))) != 1)
+        return " colspan='2'";
+    else
+        return '';
+}
+
+function print_meetings_get_months(){
+     return (array(1 => t('Januar'),
+          2 => t('Februar'),
+          3 => t('Marts'),
+          4 => t('April'),
+          5 => t('Maj'),
+          6 => t('Juni'),
+          7 => t('Juli'),
+          8 => t('August'),
+          9 => t('September'),
+          10 => t('Oktober'),
+          11 => t('November'),
+          12 => t('December')
+    ));
+}
+?>

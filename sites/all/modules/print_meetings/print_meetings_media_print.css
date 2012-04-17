@@ -1,0 +1,10 @@
+/*This file is use only on a printed version of the page*/
+@media print{@page {size: landscape}}
+
+table.form{
+display:none;
+}
+
+table.print_second_page{
+page-break-before:always;
+}

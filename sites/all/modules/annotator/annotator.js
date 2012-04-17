@@ -9,7 +9,7 @@ function init(name) {
 	
 	jQuery('#content').annotator().annotator('addPlugin', 'Store', {
 	  // The endpoint of the store on your server.
-	  prefix: 'http://192.168.1.108:5000/',
+	  prefix: 'http://192.168.42.178:5000/',
 	  annotationData: {
              'drupal_user': name
 	  },

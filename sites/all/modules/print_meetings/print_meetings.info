@@ -1,0 +1,3 @@
+name = Print Meetings
+description = A module that nicely generates the HTML page for printing the meetings
+core = 7.x
