@@ -36,9 +36,13 @@ function _print_meetings_form($form, &$form_state){
         
     //excludig form from display on print page
     if (empty($_GET['print'])){
-        
+        //formign div block if not print page
+         $form[] =  array(
+        '#markup' => '<div class="view-display-id-page">',
+        );
+         
         $form[] = array(
-            '#markup' => '<table class="form"><tr><td>'
+            '#markup' => '<table class="print-meetings-form"><tr><td>'
         );
         
         $form['submit_1_half'] = array(
@@ -109,6 +113,13 @@ function _print_meetings_form($form, &$form_state){
     $form['result'] =  array(
     '#markup' => _print_meetings_get_table($from_month,$to_month),
     );
+    
+    //finishing div block if not print page
+    if (empty($_GET['print'])){  
+        $form[] =  array(
+        '#markup' => "</div>",
+        );
+    }
 
     return $form;
 }
@@ -141,43 +152,19 @@ function _print_meetings_get_table($from_month,$to_month){
     if (!empty($results))
         $meetings = node_load_multiple($results, array('type' => array('meeting')));
     
-    //if (($to_month - $from_month) < 6)
-        return _print_meetings_get_six_month_data($from_month, $to_month, $meetings);
-    //else
-    //    return _print_meetings_get_twelve_month_data($from_month, $to_month, $meetings);
+    return _print_meetings_get_six_month_data($from_month, $to_month, $meetings);
 }
 
 function _print_meetings_get_six_month_data($from_month, $to_month, $meetings){
-    //headers 
-    $html = "<table>";
+    //headers
+    $html = "<div class='print-meetings-content'>";
+    $html .= "<table class='print-meetings'>";
     $html .= print_meetings_generate_month_headers($from_month,$to_month);
     //body - generating selected month
     $html .= print_meetings_generate_month($from_month, $to_month, $meetings);
     //end of body
     $html .= "</table>";
-    
-    return $html;
-}
-
-//is not used because of the bug in pdf maker - cannot make two pages
-function _print_meetings_get_twelve_month_data($from_month, $to_month, $meetings){
-    $half = floor(($to_month + $from_month)/2);
-    
-    //headers 1 half
-    $html = "<table>";
-    $html .= print_meetings_generate_month_headers($from_month,$half);
-    //body 1 - generating selected month 1 half
-    $html .= print_meetings_generate_month($from_month, $half, $meetings);
-    //end of body 1
-    $html .= "</table>";
-    
-    //headers 2 half
-    $html .= "<table class='print_second_page'>";
-    $html .= print_meetings_generate_month_headers($half+1,$to_month);
-    //body 2 - generating selected month 2 half
-    $html .= print_meetings_generate_month($half+1, $to_month, $meetings);
-    //end of body 2
-    $html .= "</table>";
+    $html .= "</div>";
     
     return $html;
 }
@@ -197,7 +184,7 @@ function print_meetings_generate_month($from_month, $to_month, $meetings){
     $html = "<tr>";
     for ($month = $from_month; $month <= $to_month; $month++){
         $html .= "<td width='16.6%' class='no-pad valign_top'>";
-        $html .= "<table>";
+        $html .= "<table class='print-meetings'>";
         for ($i=1; $i<= cal_days_in_month(CAL_GREGORIAN, $month, date('Y')); $i++)
         {
           $html .= "<tr>";

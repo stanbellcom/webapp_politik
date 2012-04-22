@@ -1,0 +1,467 @@
+/* This file will hold styles for the mobile version of your website (mobile first). */
+/* This also can include ANY global CSS that applies site-wide. Unless overwritten by a more specific style rule, CSS declarations in global.css will apply site-wide. */
+body {
+    background-color: #eeeeee;
+}
+
+.zone-branding-wrapper{
+    margin: 15px 0px 15px 0px;
+}
+
+.zone-content-wrapper{
+    border-top: 1px solid #b9b9b9;
+    padding-top: 15px;
+}
+
+/*---------------------------- Small Fixes End ----------------------------*/
+
+/*Fixing the size of the textfields of Search on the front page*/
+.form-text{
+    width: 150px;
+}
+
+/*---------------------------- Small Fixes End ----------------------------*/
+
+/*---------------------------- Sidepane menu Start ----------------------------*/
+
+div.content ul.menu li a{
+    display: block;
+    
+    background-color: #d5d5d5;
+    background-image: -moz-linear-gradient(center top , #FFFFFF, #d5d5d5);
+    border-color: #b9b9b9 #b9b9b9 #BBBBBB;
+    border-radius: 7px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 1px 1px 1px #545454;
+    color: #333333;
+    
+    text-shadow: 0 1px 0 #EEEEEE;
+    font-family:Arial,Helvetica,sans-serif;
+    font-weight:100;
+    font-size: 20px;
+    text-decoration: none;
+    
+    padding: 10px 10px 10px 45px;
+    
+    background-repeat:no-repeat;
+    background-position: 15px 50%;
+}
+
+div.content ul.menu li a.active{
+    box-shadow: 0px 0px 2px #545454 inset;
+    background-color: #c1c1c1;
+}
+
+div.content ul.menu li {
+    margin: 0px 0px 10px 0px;
+    padding: 0px;
+}
+
+div.content ul.menu li #menu-oversigt{
+    background-image:url('../icon_overview.png');
+}
+
+div.content ul.menu li #menu-print-kalendar{
+    background-image:url('../icon_print.png');
+}
+
+div.content ul.menu li #menu-sog{
+    background-image:url('../icon_search.png');
+}
+
+ul li.leaf {
+    list-style-image: none;
+    list-style-type: none;
+}
+
+/*---------------------------- Sidepane menu End ----------------------------*/
+
+/*---------------------------- User logout Start ----------------------------*/
+div.user-logout-block{
+    position:absolute;
+    right:0px;
+    padding: 15px 0px 5px 5px !important;
+}
+
+
+.user-logout-textbox {
+    color: #323232;
+    text-shadow:1px 1px #f5f5f5;
+    font-family:Arial,Helvetica,sans-serif;
+    font-weight:bold;
+    
+    border-color: #b9b9b9 #b9b9b9 #BBBBBB;
+    border-radius: 7px;
+    border-style: solid;
+    border-width: 1px;
+    
+    padding: 5px 10px 5px 10px;
+}
+
+.user-logout-btn{
+    background-color: #d5d5d5;
+    background-image: -moz-linear-gradient(center top , #FFFFFF, #d5d5d5);
+    border-color: #b9b9b9 #b9b9b9 #BBBBBB;
+    border-radius: 7px;
+    border-style: solid;
+    border-width: 1px;
+    
+    color: #333333;
+    padding: 5px 10px 5px 30px;
+    text-shadow: 0 1px 0 #EEEEEE;
+
+    background-repeat:no-repeat;
+    background-position: 5px 50%;
+    
+    background-image:url('../icon_log_out.png');
+}
+
+.user-logout-btn a:link,  .user-logout-btn a:visited{
+    color: #323232;
+    text-shadow:1px 1px #f5f5f5;
+    font-family:Arial,Helvetica,sans-serif;
+    font-weight:100;
+    font-size: 12px;
+    text-decoration: none;
+    text-transform:uppercase;
+}
+
+
+/*---------------------------- User logout End ----------------------------*/
+
+
+/*---------------------------- Views Start ----------------------------*/
+
+div.attachment .view-header h3{
+    color: #323232;
+    text-shadow:1px 1px #f5f5f5;
+    text-transform:uppercase;
+    font-family:Arial,Helvetica,sans-serif;
+    font-weight:100;
+    font-size: 16px;
+    
+    background-color: #dedede;
+    padding: 5px;
+}
+
+div.date-heading h3 a, div.date-heading h3{
+    color: #323232;
+    text-decoration: none;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size: 20px;
+}
+
+.view-id-events,
+.view-id-user_committee,
+.view-id-user_follow_committees,
+.view-id-kommende_m_der_i_mine_udvalg,
+.view-id-seneste_8_m_der_i_de_st_ende_politiske_udvalg_,
+.views-exposed-form,
+.block-system-main,
+div[class*="view-display-id-page"]  {
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    border-color: #b9b9b9;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    box-shadow: 0px 0px 0px 3px #dedede inset;
+}
+div.view {
+    padding: 1px 5px 5px 5px;
+}
+
+div.views-exposed-form {
+    padding: 5px 10px 0px 20px;
+}
+
+div.attachment{
+    margin-top: 30px;
+}
+
+
+/*---------------------------- Views End ----------------------------*/
+
+/*---------------------------- Blocks START ----------------------------*/
+h2.block-title, h1.title{
+    color: #323232;
+    text-shadow:1px 1px #f5f5f5;
+    text-transform:uppercase;
+    font-family:Arial,Helvetica,sans-serif;
+    font-weight:100;
+    font-size: 20px;
+    
+    background-color: #dedede;
+    padding: 5px 5px 3px 15px;
+    
+    border-top:1px solid;
+    border-left:1px solid;
+    border-right:1px solid;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    border-color: #b9b9b9;
+}
+
+div.front-page-info-block{
+    padding: 5px 10px 10px 20px;
+}
+
+div.front-page-content-block {
+    margin-bottom: 50px
+}
+
+div.block-inner{
+    margin-bottom: 10px;
+}
+/*---------------------------- Blocks END ----------------------------*/
+
+/*---------------------------- Date override START ----------------------------*/
+.container-inline-date .form-item, .container-inline-date .form-item input {
+    width: 150px;
+}
+
+.date-nav {
+    clear: both;
+    padding-bottom: 0px;
+    width: 100%;
+}
+
+.view .date-nav-wrapper .date-prev {
+    background: none repeat scroll 0 0 #dedede;
+    border-radius: 7px 0 0 7px;
+    border: 1px solid #b9b9b9;
+    float: none;
+    font-size: 12px;
+    left: 10px;
+    padding: 0px;
+    position: absolute;
+    right: auto;
+    text-align: right;
+    top: 3px;
+    width: auto;
+    z-index: 1;
+}
+
+.block-views .view .date-nav-wrapper .date-prev {
+    left: 10px;
+    right: auto;
+}
+
+.view .date-nav-wrapper .date-next {
+    background: none repeat scroll 0 0 #dedede;
+    border-radius: 0 7px 7px 0;
+    border: 1px solid #b9b9b9;
+    float: none;
+    font-size: 12px;
+    padding: 0px;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 3px;
+    width: auto;
+    z-index: 1;
+}
+
+.block-views .view .date-nav-wrapper .date-next {
+    left: auto;
+    right: 10px;
+}
+
+.view .date-nav-wrapper .date-prev a, .view .date-nav-wrapper .date-next a {
+    color: inherit;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.calendar-calendar .mini tr td.today, .calendar-calendar .mini tr.odd td.today, .calendar-calendar .mini tr.even td.today, .calendar-calendar .mini tr td.today a {
+    background-color: #790056;
+    color: #feffff;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.calendar-calendar .has-events, .calendar-calendar .has-events a{
+    background-color: #f9d4ed;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.calendar-calendar td .inner div.day a {
+    color: #790056;
+}
+
+.calendar-calendar .month-view .full tr td.today, .calendar-calendar .month-view .full tr.odd td.today, .calendar-calendar .month-view .full tr.even td.today {
+    background: none repeat scroll 0 0 transparent;
+    border-left: 2px solid #790056;
+    border-right: 2px solid #790056;
+}
+
+.calendar-calendar .month-view .full tr td.single-day.today {
+    border-bottom: 2px solid #790056;
+}
+
+.calendar-calendar .month-view .full td.date-box.today {
+    border-color: #790056;
+    border-style: solid;
+    border-width: 2px 2px 0;
+}
+
+.calendar-calendar tr td.today, .calendar-calendar tr.odd td.today, .calendar-calendar tr.even td.today, .calendar-calendar tr td.today a {
+    color: #790056;
+}
+
+.calendar-calendar td {
+    color: #777777 !important;
+}
+
+/*---------------------------- Date override END ----------------------------*/
+
+/*---------------------------- Omega globals override START ----------------------------*/
+a:link, a:visited {
+    color: #790056;
+    text-decoration: underline;
+}
+
+p, dl, hr, h1, h2, h3, h4, h5, h6, ol, ul, pre, table, address, fieldset {
+    margin-bottom: 0px;
+}
+
+.pager {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #EBEBEB;
+    border-color: #DDDDDD #BBBBBB #999999;
+    border-radius: 5px 5px 5px 5px;
+    border-width: 0px;
+}
+
+.item-list .pager {
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    position: static;
+}
+
+.pager li a {
+    background: none;
+    cursor: pointer;
+}
+
+.pager li {
+    border-right: none;
+}
+/*----------------------------Omega globals override END----------------------------*/
+
+/*----------------------------Tabs override start----------------------------*/
+tr:hover td, tr.even:hover td.active, tr.odd:hover td.active {
+    background: none;
+}
+
+ul.primary {
+    border-bottom: none;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-color: #b9b9b9;
+    background-color: #dedede;
+    
+    border-collapse: collapse;
+    height: auto;
+    line-height: normal;
+    list-style: none outside none;
+    margin: 0px;
+    padding: 0px 0px 10px 5px;
+    white-space: nowrap;
+}
+
+.tabs li{
+    display: inline;
+    background-color: #dedede;
+    list-style: none outside none;
+    margin-left: 50px;
+}
+
+ul.primary li a {
+    border-color: #b9b9b9;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 7px;
+    padding: 5px 20px 5px 20px;
+    text-decoration: none;
+}
+
+ul.primary li.active a {
+    color: #feffff;
+    font-weight: bold;
+    background-color: #790056;
+    border-style: none;
+    padding: 5px 20px 5px 20px;
+}
+
+
+/*----------------------------Tabs override END----------------------------*/
+
+/* ---------------------------- Table Styles START---------------------------- */
+
+table {
+  border: 0;
+  border-spacing: 0;
+  font-size: 0.857em;
+  margin: 0px 0;
+  width: 100%;
+}
+table table {
+  font-size: 1em;
+}
+#footer-wrapper table {
+  font-size: 1em;
+}
+table tr th {
+  background: #757575;
+  background: rgba(0, 0, 0, 0.51);
+  border-bottom-style: none;
+  border-top-style: none;
+}
+table tr th,
+table tr th a,
+table tr th a:hover {
+  color: #FFF;
+  font-weight: bold;
+}
+table tbody tr th {
+  vertical-align: top;
+}
+
+tr th {
+  padding: 4px 9px;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  text-align: left; /* LTR */
+}
+
+#footer-wrapper tr td,
+#footer-wrapper tr th {
+  border-color: #555;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+tr.odd {
+  background: #e4e4e4;
+  background: rgba(0, 0, 0, 0.105);
+}
+tr.even {
+  background: #efefef;
+  background: rgba(0, 0, 0, 0.063);
+}
+table ul.links {
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+}
+table ul.links li {
+  padding: 0 1em 0 0;
+}}
+/* ---------------------------- Table Styles END---------------------------- */
