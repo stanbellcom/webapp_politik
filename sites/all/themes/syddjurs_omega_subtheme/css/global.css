@@ -1,19 +1,87 @@
 /* This file will hold styles for the mobile version of your website (mobile first). */
 /* This also can include ANY global CSS that applies site-wide. Unless overwritten by a more specific style rule, CSS declarations in global.css will apply site-wide. */
-body {
-    background-color: #eeeeee;
+#section-header{
+    /* W3C */
+    background:
+    url('../header_imgs/img_header_elipse.png') no-repeat bottom left,
+    linear-gradient(top, #ffffff 0%,#e7e7e7 100%);
+    
+    /* Safari 4-5, Chrome 1-9 */
+    background:
+    url('../header_imgs/img_header_elipse.png') no-repeat bottom left,
+    -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e7e7e7), to(#ffffff));
+    
+    /* Safari 5.1, Chrome 10+ */
+    background:
+    url('../header_imgs/img_header_elipse.png') no-repeat bottom left,
+    -webkit-linear-gradient(top, #ffffff, #e7e7e7);
+    
+    /* Firefox 3.6+ */
+    background:
+    url('../header_imgs/img_header_elipse.png') no-repeat bottom left,
+    -moz-linear-gradient(top, #ffffff, #e7e7e7);
+    
+    background:
+    url('../header_imgs/img_header_elipse.png') no-repeat bottom left,
+    -moz-linear-gradient(top, #ffffff, #e7e7e7);
+    
+    /* IE 10 */
+    background:
+    url('../header_imgs/img_header_elipse.png') no-repeat bottom left,
+    -ms-linear-gradient(top, #ffffff, #e7e7e7);
+    
+    /* Opera 11.10+ */
+    background:
+    url('../header_imgs/img_header_elipse.png') no-repeat bottom left,
+    -o-linear-gradient(top, #ffffff, #e7e7e7);
+    
+    background-size: 100% 100%;
+}
+
+#section-content{
+    /* W3C */
+    background:
+    url('../body_imgs/img_body_elipse.png') no-repeat top left,
+    linear-gradient(top, #f5f5f5 0%,#e7e7e7 100%);
+    
+    /* Safari 4-5, Chrome 1-9 */
+    background:
+    url('../body_imgs/img_body_elipse.png') no-repeat top left,
+    -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e7e7e7), to(#f5f5f5));
+    
+    /* Safari 5.1, Chrome 10+ */
+    background:
+    url('../body_imgs/img_body_elipse.png') no-repeat top left,
+    -webkit-linear-gradient(top, #f5f5f5, #e7e7e7);
+    
+    /* Firefox 3.6+ */
+    background:
+    url('../body_imgs/img_body_elipse.png') no-repeat top left,
+    -moz-linear-gradient(top, #f5f5f5, #e7e7e7);
+    
+    /* IE 10 */
+    background:
+    url('../body_imgs/img_body_elipse.png') no-repeat top left,
+    -ms-linear-gradient(top, #f5f5f5, #e7e7e7);
+    
+    /* Opera 11.10+ */
+    background:
+    url('../body_imgs/img_body_elipse.png') no-repeat top left,
+    -o-linear-gradient(top, #f5f5f5, #e7e7e7);
+    
+    background-size: 80% 100%;
 }
 
 .zone-branding-wrapper{
-    margin: 15px 0px 15px 0px;
+    padding: 15px 0px 15px 0px;
 }
 
 .zone-content-wrapper{
-    border-top: 1px solid #b9b9b9;
+    border-top: 1px solid #e5e5e5;
     padding-top: 15px;
 }
 
-/*---------------------------- Small Fixes End ----------------------------*/
+/*---------------------------- Small Fixes Start ----------------------------*/
 
 /*Fixing the size of the textfields of Search on the front page*/
 .form-text{
@@ -27,13 +95,11 @@ body {
 div.content ul.menu li a{
     display: block;
     
-    background-color: #d5d5d5;
-    background-image: -moz-linear-gradient(center top , #FFFFFF, #d5d5d5);
     border-color: #b9b9b9 #b9b9b9 #BBBBBB;
     border-radius: 7px;
     border-style: solid;
     border-width: 1px;
-    box-shadow: 1px 1px 1px #545454;
+    /*box-shadow: 1px 1px 1px #545454;*/
     color: #333333;
     
     text-shadow: 0 1px 0 #EEEEEE;
@@ -43,14 +109,10 @@ div.content ul.menu li a{
     text-decoration: none;
     
     padding: 10px 10px 10px 45px;
-    
-    background-repeat:no-repeat;
-    background-position: 15px 50%;
 }
 
 div.content ul.menu li a.active{
-    box-shadow: 0px 0px 2px #545454 inset;
-    background-color: #c1c1c1;
+    box-shadow: 0px 2px 2px #5a5a5a inset;
 }
 
 div.content ul.menu li {
@@ -59,15 +121,110 @@ div.content ul.menu li {
 }
 
 div.content ul.menu li #menu-oversigt{
-    background-image:url('../icon_overview.png');
+    /* W3C */
+    background: url('../icon_overview.png') no-repeat 15px 50%, linear-gradient(top, #fcfcfc 0%,#c0c0c0 100%);
+    /* Safari 4-5, Chrome 1-9 */
+    background: url('../icon_overview.png') no-repeat 15px 50%, -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e7e7e7), to(#c0c0c0));
+    /* Safari 5.1, Chrome 10+ */
+    background: url('../icon_overview.png') no-repeat 15px 50%, -webkit-linear-gradient(top, #fcfcfc, #c0c0c0);
+    /* Firefox 3.6+ */
+    background: url('../icon_overview.png') no-repeat 15px 50%, -moz-linear-gradient(top, #fcfcfc, #c0c0c0);
+    /* IE 10 */
+    background: url('../icon_overview.png') no-repeat 15px 50%, -ms-linear-gradient(top, #fcfcfc, #c0c0c0);
+    /* Opera 11.10+ */
+    background: url('../icon_overview.png') no-repeat 15px 50%, -o-linear-gradient(top, #fcfcfc, #c0c0c0);
+}
+
+div.content ul.menu li #menu-oversigt.active{
+    /* W3C */
+    background: url('../icon_overview.png') no-repeat 15px 50%, linear-gradient(top, #9b9b9b 0%,#e4e4e4 100%);
+    /* Safari 4-5, Chrome 1-9 */
+    background: url('../icon_overview.png') no-repeat 15px 50%, -webkit-gradient(linear, 0% 0%, 0% 100%, from(#9b9b9b), to(#e4e4e4));
+    /* Safari 5.1, Chrome 10+ */
+    background: url('../icon_overview.png') no-repeat 15px 50%, -webkit-linear-gradient(top, #9b9b9b, #e4e4e4);
+    /* Firefox 3.6+ */
+    background: url('../icon_overview.png') no-repeat 15px 50%, -moz-linear-gradient(top, #9b9b9b, #e4e4e4);
+    /* IE 10 */
+    background: url('../icon_overview.png') no-repeat 15px 50%,-ms-linear-gradient(top, #9b9b9b, #e4e4e4);
+    /* Opera 11.10+ */
+    background: url('../icon_overview.png') no-repeat 15px 50%,-o-linear-gradient(top, #9b9b9b, #e4e4e4);
 }
 
 div.content ul.menu li #menu-print-kalendar{
-    background-image:url('../icon_print.png');
+    /* W3C */
+    background: url('../icon_print.png') no-repeat 15px 50%, linear-gradient(top, #fcfcfc 0%,#c0c0c0 100%);
+    /* Safari 4-5, Chrome 1-9 */
+    background: url('../icon_print.png') no-repeat 15px 50%, -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#c0c0c0));
+    /* Safari 5.1, Chrome 10+ */
+    background: url('../icon_print.png') no-repeat 15px 50%, -webkit-linear-gradient(top, #fcfcfc, #c0c0c0);
+    /* Firefox 3.6+ */
+    background: url('../icon_print.png') no-repeat 15px 50%, -moz-linear-gradient(top, #fcfcfc, #c0c0c0);
+    /* IE 10 */
+    background: url('../icon_print.png') no-repeat 15px 50%, -ms-linear-gradient(top, #fcfcfc, #c0c0c0);
+    /* Opera 11.10+ */
+    background: url('../icon_print.png') no-repeat 15px 50%, -o-linear-gradient(top, #fcfcfc, #c0c0c0);
+}
+
+div.content ul.menu li #menu-print-kalendar.active{
+    /* W3C */
+    background:url('../icon_print.png') no-repeat 15px 50%,linear-gradient(top, #9b9b9b 0%,#e4e4e4 100%);
+    /* Safari 4-5, Chrome 1-9 */
+    background:url('../icon_print.png') no-repeat 15px 50%,-webkit-gradient(linear, 0% 0%, 0% 100%, from(#9b9b9b), to(#e4e4e4));
+    /* Safari 5.1, Chrome 10+ */
+    background:url('../icon_print.png') no-repeat 15px 50%,-webkit-linear-gradient(top, #9b9b9b, #e4e4e4);
+    /* Firefox 3.6+ */
+    background:url('../icon_print.png') no-repeat 15px 50%,-moz-linear-gradient(top, #9b9b9b, #e4e4e4);
+    /* IE 10 */
+    background:url('../icon_print.png') no-repeat 15px 50%,-ms-linear-gradient(top, #9b9b9b, #e4e4e4);
+    /* Opera 11.10+ */
+    background:url('../icon_print.png') no-repeat 15px 50%,-o-linear-gradient(top, #9b9b9b, #e4e4e4);
 }
 
 div.content ul.menu li #menu-sog{
-    background-image:url('../icon_search.png');
+    /* W3C */
+    background:url('../icon_search.png') no-repeat 15px 50%,linear-gradient(top, #fcfcfc 0%,#c0c0c0 100%);
+    /* Safari 4-5, Chrome 1-9 */
+    background:url('../icon_search.png') no-repeat 15px 50%,-webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#c0c0c0));
+    /* Safari 5.1, Chrome 10+ */
+    background:url('../icon_search.png') no-repeat 15px 50%,-webkit-linear-gradient(top, #fcfcfc, #c0c0c0);
+    /* Firefox 3.6+ */
+    background:url('../icon_search.png') no-repeat 15px 50%,-moz-linear-gradient(top, #fcfcfc, #c0c0c0);
+    /* IE 10 */
+    background:url('../icon_search.png') no-repeat 15px 50%,-ms-linear-gradient(top, #fcfcfc, #c0c0c0);
+    /* Opera 11.10+ */
+    background:url('../icon_search.png') no-repeat 15px 50%,-o-linear-gradient(top, #fcfcfc, #c0c0c0);
+}
+
+div.content ul.menu li #menu-sog.active{
+    /* fallback */
+    background:url('../icon_search.png') no-repeat 15px 50%,linear-gradient(top, #9b9b9b 0%,#e4e4e4 100%);
+    /* Safari 4-5, Chrome 1-9 */
+    background:url('../icon_search.png') no-repeat 15px 50%,-webkit-gradient(linear, 0% 0%, 0% 100%, from(#9b9b9b), to(#e4e4e4));
+    /* Safari 5.1, Chrome 10+ */
+    background:url('../icon_search.png') no-repeat 15px 50%,-webkit-linear-gradient(top, #9b9b9b, #e4e4e4);
+    /* Firefox 3.6+ */
+    background: url('../icon_search.png') no-repeat 15px 50%,-moz-linear-gradient(top, #9b9b9b, #e4e4e4);
+    /* IE 10 */
+    background:url('../icon_search.png') no-repeat 15px 50%,-ms-linear-gradient(top, #9b9b9b, #e4e4e4);
+    /* Opera 11.10+ */
+    background:url('../icon_search.png') no-repeat 15px 50%,-o-linear-gradient(top, #9b9b9b, #e4e4e4);
+}
+
+#block-views-exp-meetings-search-page h2{
+    /* W3C */
+    background:url('../icon_search.png') no-repeat 15px 50%,linear-gradient(top, #f3f3f3 0%,#cbcbcb 100%);
+    /* Safari 4-5, Chrome 1-9 */
+    background:url('../icon_search.png') no-repeat 15px 50%,-webkit-gradient(linear, 0% 0%, 0% 100%, from(#f3f3f3), to(#cbcbcb));
+    /* Safari 5.1, Chrome 10+ */
+    background:url('../icon_search.png') no-repeat 15px 50%,-webkit-linear-gradient(top, #f3f3f3, #cbcbcb);
+    /* Firefox 3.6+ */
+    background:url('../icon_search.png') no-repeat 15px 50%,-moz-linear-gradient(top, #f3f3f3, #cbcbcb);
+    /* IE 10 */
+    background:url('../icon_search.png') no-repeat 15px 50%,-ms-linear-gradient(top, #f3f3f3, #cbcbcb);
+    /* Opera 11.10+ */
+    background:url('../icon_search.png') no-repeat 15px 50%,-o-linear-gradient(top, #f3f3f3, #cbcbcb);
+    
+    padding-left: 45px;
 }
 
 ul li.leaf {
@@ -76,6 +233,19 @@ ul li.leaf {
 }
 
 /*---------------------------- Sidepane menu End ----------------------------*/
+
+/*---------------------------- Help buttons Start ----------------------------*/
+.help-button{
+    position: absolute;
+    min-width: 30px;
+    min-height: 30px;
+    top: 10px;
+    right: 10px;
+    float:right;
+    background: url('../icon_help.png') no-repeat 50% top;
+}
+
+/*---------------------------- Help buttons End ----------------------------*/
 
 /*---------------------------- User logout Start ----------------------------*/
 div.user-logout-block{
@@ -99,22 +269,28 @@ div.user-logout-block{
     padding: 5px 10px 5px 10px;
 }
 
-.user-logout-btn{
-    background-color: #d5d5d5;
-    background-image: -moz-linear-gradient(center top , #FFFFFF, #d5d5d5);
+.user-logout-btn a{
+    /* fallback */
+    background: url('../icon_log_out.png') no-repeat 5px 50%, linear-gradient(top, #fcfcfc 0%,#c0c0c0 100%);
+    /* Safari 4-5, Chrome 1-9 */
+    background: url('../icon_log_out.png') no-repeat 5px 50%, -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e7e7e7), to(#c0c0c0));
+    /* Safari 5.1, Chrome 10+ */
+    background: url('../icon_log_out.png') no-repeat 5px 50%, -webkit-linear-gradient(top, #fcfcfc, #c0c0c0);
+    /* Firefox 3.6+ */
+    background: url('../icon_log_out.png') no-repeat 5px 50%, -moz-linear-gradient(top, #fcfcfc, #c0c0c0);
+    /* IE 10 */
+    background: url('../icon_log_out.png') no-repeat 5px 50%, -ms-linear-gradient(top, #fcfcfc, #c0c0c0);
+    /* Opera 11.10+ */
+    background: url('../icon_log_out.png') no-repeat 5px 50%, -o-linear-gradient(top, #fcfcfc, #c0c0c0);
+    
     border-color: #b9b9b9 #b9b9b9 #BBBBBB;
     border-radius: 7px;
     border-style: solid;
     border-width: 1px;
     
     color: #333333;
-    padding: 5px 10px 5px 30px;
+    padding: 6px 10px 5px 30px;
     text-shadow: 0 1px 0 #EEEEEE;
-
-    background-repeat:no-repeat;
-    background-position: 5px 50%;
-    
-    background-image:url('../icon_log_out.png');
 }
 
 .user-logout-btn a:link,  .user-logout-btn a:visited{
@@ -158,7 +334,7 @@ div.date-heading h3 a, div.date-heading h3{
 .view-id-kommende_m_der_i_mine_udvalg,
 .view-id-seneste_8_m_der_i_de_st_ende_politiske_udvalg_,
 .views-exposed-form,
-.block-system-main,
+.node,
 div[class*="view-display-id-page"]  {
     border-left: 1px solid;
     border-right: 1px solid;
@@ -166,8 +342,9 @@ div[class*="view-display-id-page"]  {
     border-color: #b9b9b9;
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
-    box-shadow: 0px 0px 0px 3px #dedede inset;
+    box-shadow: 0px 0px 0px 3px #cbcbcb inset;
 }
+
 div.view {
     padding: 1px 5px 5px 5px;
 }
@@ -192,7 +369,19 @@ h2.block-title, h1.title{
     font-weight:100;
     font-size: 20px;
     
-    background-color: #dedede;
+    /* fallback */
+    background: linear-gradient(top, #f3f3f3 0%,#cbcbcb 100%);
+    /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f3f3f3), to(#cbcbcb));
+    /* Safari 5.1, Chrome 10+ */
+    background: -webkit-linear-gradient(top, #f3f3f3, #cbcbcb);
+    /* Firefox 3.6+ */
+    background: -moz-linear-gradient(top, #f3f3f3, #cbcbcb);
+    /* IE 10 */
+    background: -ms-linear-gradient(top, #f3f3f3, #cbcbcb);
+    /* Opera 11.10+ */
+    background: -o-linear-gradient(top, #f3f3f3, #cbcbcb);
+    
     padding: 5px 5px 3px 15px;
     
     border-top:1px solid;
@@ -203,12 +392,12 @@ h2.block-title, h1.title{
     border-color: #b9b9b9;
 }
 
-div.front-page-info-block{
+div.front-page-info-block, .node{
     padding: 5px 10px 10px 20px;
 }
 
 div.front-page-content-block {
-    margin-bottom: 50px
+    margin-bottom: 50px;
 }
 
 div.block-inner{
@@ -228,9 +417,6 @@ div.block-inner{
 }
 
 .view .date-nav-wrapper .date-prev {
-    background: none repeat scroll 0 0 #dedede;
-    border-radius: 7px 0 0 7px;
-    border: 1px solid #b9b9b9;
     float: none;
     font-size: 12px;
     left: 10px;
@@ -238,9 +424,9 @@ div.block-inner{
     position: absolute;
     right: auto;
     text-align: right;
-    top: 3px;
     width: auto;
     z-index: 1;
+    background: none;
 }
 
 .block-views .view .date-nav-wrapper .date-prev {
@@ -249,18 +435,15 @@ div.block-inner{
 }
 
 .view .date-nav-wrapper .date-next {
-    background: none repeat scroll 0 0 #dedede;
-    border-radius: 0 7px 7px 0;
-    border: 1px solid #b9b9b9;
     float: none;
     font-size: 12px;
     padding: 0px;
     position: absolute;
     right: 0;
     text-align: right;
-    top: 3px;
     width: auto;
     z-index: 1;
+    background: none;
 }
 
 .block-views .view .date-nav-wrapper .date-next {
@@ -281,10 +464,17 @@ div.block-inner{
     border-radius: 5px;
 }
 
-.calendar-calendar .has-events, .calendar-calendar .has-events a{
+/*.calendar-calendar .has-events,*/
+.calendar-calendar .has-events a{
+    text-decoration: none;
     background-color: #f9d4ed;
     font-weight: bold;
     border-radius: 5px;
+    padding: 3px 3px 3px 8px;
+}
+
+.calendar-calendar .has-no-events div.mini-day-off{
+    padding: 3px 3px 1px 8px;
 }
 
 .calendar-calendar td .inner div.day a {
@@ -313,6 +503,7 @@ div.block-inner{
 
 .calendar-calendar td {
     color: #777777 !important;
+    vertical-align: bottom;
 }
 
 /*---------------------------- Date override END ----------------------------*/
@@ -355,6 +546,35 @@ p, dl, hr, h1, h2, h3, h4, h5, h6, ol, ul, pre, table, address, fieldset {
 .pager li {
     border-right: none;
 }
+
+.form-submit, .view .date-nav-wrapper .date-next a,  .view .date-nav-wrapper .date-prev a{
+    /* fallback */
+    background: linear-gradient(top, #fcfcfc 0%,#c0c0c0 100%);
+    /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e7e7e7), to(#c0c0c0));
+    
+    /* Safari 5.1, Chrome 10+ */
+    background: -webkit-linear-gradient(top, #fcfcfc, #c0c0c0);
+    
+    /* Firefox 3.6+ */
+    background: -moz-linear-gradient(top, #fcfcfc, #c0c0c0);
+    
+    /* IE 10 */
+    background: -ms-linear-gradient(top, #fcfcfc, #c0c0c0);
+    
+    /* Opera 11.10+ */
+    background: -o-linear-gradient(top, #fcfcfc, #c0c0c0);
+    
+    border-color: #b9b9b9 #b9b9b9 #BBBBBB;
+    border-radius: 7px;
+    border-style: solid;
+    border-width: 1px;
+    
+    color: #333333;
+    text-shadow: 0 1px 0 #EEEEEE;
+    
+    padding: 5px 10px 5px 10px;
+}
 /*----------------------------Omega globals override END----------------------------*/
 
 /*----------------------------Tabs override start----------------------------*/
@@ -367,7 +587,7 @@ ul.primary {
     border-left: 1px solid;
     border-right: 1px solid;
     border-color: #b9b9b9;
-    background-color: #dedede;
+    background-color: #cbcbcb;
     
     border-collapse: collapse;
     height: auto;
@@ -380,7 +600,6 @@ ul.primary {
 
 .tabs li{
     display: inline;
-    background-color: #dedede;
     list-style: none outside none;
     margin-left: 50px;
 }

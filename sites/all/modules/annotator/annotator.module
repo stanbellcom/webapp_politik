@@ -5,48 +5,137 @@
  */
 function annotator_menu() {
   $items = array();
-
-  $items['annotator/test'] = array(
-    'title' => 'Drupal 7 test pager',
+  
+  $items['annotator/bullet-point-attachment'] = array(
+    'title' => 'Bilag',
     'type' => MENU_CALLBACK,
-    'page callback' => '_annotator_callback',
+    'page callback' => '_annotator_view',
     'access arguments' => array('access content')
   );
+  
+  $items['annotator/bullet-point-attachment/print'] = array(
+    'title' => 'Bilag Print Version',
+    'type' => MENU_CALLBACK,
+    'page callback' => '_annotator_view_print',
+    'access arguments' => array('access content')
+  );
+
 
   return $items;
 }
 
-function _annotator_callback() {
-	drupal_add_js(drupal_get_path('module', 'annotator') . '/lib/jquery.min.js');
-	drupal_add_js(drupal_get_path('module', 'annotator') . '/lib/annotator-full.min.js');
-	drupal_add_js(drupal_get_path('module', 'annotator') . '/lib/touch-plugin/annotator.touch.min.js');
-	drupal_add_js(drupal_get_path('module', 'annotator') . '/lib/json2.js');
-
-	drupal_add_js(drupal_get_path('module', 'annotator') . '/annotator.js');
+function _annotator_view($bilag_id = '') {
+	$text = 'Intet bilag er fundet';
+  
+	if (!empty($bilag_id)){
+	  $bilag = node_load($bilag_id);
+	  if (strcmp($bilag->type, 'bullet_point_attachment') == 0){
+	    //drupal_add_js(drupal_get_path('module', 'annotator') . '/lib/jquery.min.js');
+	    drupal_add_js(drupal_get_path('module', 'annotator') . '/lib/annotator-full.min.js');
+	    drupal_add_js(drupal_get_path('module', 'annotator') . '/lib/touch-plugin/annotator.touch.min.js');
+	    drupal_add_js(drupal_get_path('module', 'annotator') . '/lib/json2.js');
+    
+	    drupal_add_js(drupal_get_path('module', 'annotator') . '/annotator.js');
+	    
+	    global $user;
+	    drupal_add_js('init("'.$user->name.'","'.$bilag_id.'");', 'inline');
+    
+	    drupal_add_css(drupal_get_path('module', 'annotator') . '/lib/touch-plugin/annotator.touch.css');
+	    drupal_add_css(drupal_get_path('module', 'annotator') . '/lib/annotator-full.min.css');
+	  
+	    drupal_set_title('Bilag - '.$bilag->title);
+	    $text = $bilag->field_bpa_body['und'][0]['value'];
+	  }
+	}
+	$link = $GLOBALS['base_path'].'?q=/print/annotator/bullet-point-attachment/print/'.$bilag_id;
 	
-	global $user;
-	drupal_add_js('init("'.$user->name.'");', 'inline');
-
-	drupal_add_css(drupal_get_path('module', 'annotator') . '/lib/touch-plugin/annotator.touch.css');
-	drupal_add_css(drupal_get_path('module', 'annotator') . '/lib/annotator-full.min.css');
-
-	$text = "<p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. 
-	  He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. 
-	  The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest 
-	  of him, waved about helplessly as he looked.</p>";
-	$text.= "<p\"What's happened to me?\" he thought. It wasn't a dream. His room, a proper human room although a little too small, 
-	  lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - 
-	  and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame. 
-	  It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her 
-	  lower arm towards the viewer.</p>";
-	$text.="<p>Gregor then turned to look out the window at the dull weather. Drops of rain could be heard hitting the pane, 
-	  which made him feel quite sad. \"How about if I sleep a little bit longer and forget all this nonsense\", 
-	  he thought, but that was something he was unable to do because he was used to sleeping on his right, and in his present state 
-	  couldn't get into that position. However hard he threw himself onto his right, he always rolled back to where he was. 
-	  He must have tried it a hundred times, shut his eyes so that he wouldn't have to look at the floundering legs, and only stopped when 
-	  he began to feel a mild, dull pain there that he had never felt before.</p>";
-
-	return ('<div id="content">'.$text.'</div>');
+	return ('<div class="node">
+		<div class="help-button" title="Help text goes here"></div>
+		<div align="right"><input class="form-submit" type="button" onclick="window.open(\''.$link.'\')" value="Print"></div>'.
+		'<div id="content">'.$text.'</div>
+		</div>');
 }
+
+function _annotator_view_print($bilag_id = '') {
+	$text = 'Intet bilag er fundet';
+  
+	if (!empty($bilag_id)){
+	  $bilag = node_load($bilag_id);
+	  if (strcmp($bilag->type, 'bullet_point_attachment') == 0){
+	    
+	    drupal_set_title('Bilag - '.$bilag->title);
+	    $header = '<h3>Bilag - '.$bilag->title.'</h3>';
+	    
+	    $body = $bilag->field_bpa_body['und'][0]['value'];
+	    
+	    //getting annotations from storage
+	    $annotations = _annotator_curl_annotations($bilag_id);
+	    
+	    //initiating variabes
+	    $annotation_list = '';
+	    $note_nr = 1;
+	    
+	    //printing annotations one by one in right order
+	    while (!empty($annotations)){
+	      //flushing array indexing
+	      $annotations = array_values($annotations);
+	      
+	      $first_note_ind = 0;
+	      for ($i=1; $i < count($annotations); $i++){
+		if ($annotations[$i]['ranges'][0]['startOffset'] < $annotations[$first_note_ind]['ranges'][0]['startOffset'])
+		  $first_note_ind = $i;
+	      }
+	      $body = _annotator_append_index($body, $annotations[$first_note_ind], $note_nr);
+	      $annotation_list .= _annotator_append_note($annotations[$first_note_ind], $note_nr);
+	      $note_nr++;
+	      
+	      unset($annotations[$first_note_ind]);
+	    }
+	    
+	    $text = $header;
+	    $text .= $body;
+	    $text .= "<hr/>";
+	    $text .= $annotation_list;
+	  }
+	}
+	
+	return ('<div class="node" id="content">'.$text.'</div>');
+}
+
+function _annotator_curl_annotations($bilag_id){
+  //globals
+  $IP_ADDRESS = '192.168.42.179';
+  $PORT_NR = '5000';
+
+  global $user;
+  $url = $IP_ADDRESS.':'.$PORT_NR.'/search?drupal_user='.$user->name.'&bilag_id='.$bilag_id;
+  
+  $ch = curl_init();
+
+  // Set query data here with the URL
+  curl_setopt($ch, CURLOPT_URL, $url); 
+
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($ch, CURLOPT_TIMEOUT, '3');
+  $content_json = trim(curl_exec($ch));
+  curl_close($ch);
+  
+  $content = json_decode($content_json, true);
+  return $content['rows'];
+}
+
+function _annotator_append_index($body, $note, $note_nr){
+  $positionStart = strpos($body, $note['quote'], $note['ranges'][0]['startOffset']);
+  $positionEnd = $positionStart+strlen($note['quote']);
+  $body = substr_replace($body, '<sup><b>['.$note_nr.']</b></sup>', $positionEnd, 0);
+  
+  return $body;
+}
+
+function _annotator_append_note($note, $index){
+  return '<b>['.$index.']</b> '.$note['text'].'<br/>';
+}
+
+
 ?>
 

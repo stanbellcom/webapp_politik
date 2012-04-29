@@ -43,7 +43,7 @@ def main():
         # in the Annotator authentication documentation[1].
         #
         # [1]: https://github.com/okfn/annotator/wiki/Authentication
-        g.user = MockUser('alice')
+        g.user = MockUser('webapp_politik')
 
         # By default, this test application won't do full-on authentication
         # tests. Set AUTH_ON to True in the config file to enable (limited)
@@ -64,7 +64,7 @@ def main():
 
     app.register_blueprint(store.store)
 
-    host = os.environ.get('HOST', '192.168.42.178')
+    host = os.environ.get('HOST', '192.168.42.179')
     port = int(os.environ.get('PORT', 5000))
     app.run(host=host, port=port)
 

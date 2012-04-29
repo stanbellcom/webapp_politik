@@ -94,7 +94,6 @@ function _print_meetings_form($form, &$form_state){
         );
         
         $link = $GLOBALS['base_path'].'?q=printpdf/meetings/print&from_month='.$from_month.'&to_month='.$to_month.'&print=true';
-        //$link = 'http://google.com';
         $form[] = array(
             '#markup' => "<input type='button' value='Print' class='form-submit' onClick='window.open(\"".$link."\")' />",
         );
