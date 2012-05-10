@@ -1,0 +1,29 @@
+function bullet_point_collapse_expand_behaviour(){
+   jQuery(document).ready(function() {   
+	jQuery(".bullet-point-attachments .view-content .item-list ul").each(function(index) {
+	  jQuery(this).attr("id","hide_show_item_list_ul_"+index);
+	  jQuery(this).hide();
+	  
+	  jQuery(this).parent().parent().parent().children(".hide_show_button_container").append("<input type='button' class='button' id='hide_show_"+index+"' value='⇓'></a>");
+	  
+	  jQuery("#hide_show_"+index).click(function(){
+ 	    jQuery("#hide_show_item_list_ul_"+index).toggle();
+	    
+	    if (jQuery("#hide_show_"+index).val() == "⇓")
+		jQuery("#hide_show_"+index).val("⇑");
+	    else
+		jQuery("#hide_show_"+index).val("⇓");
+ 	  });
+	});
+   });
+}
+
+function bullet_point_attachment_add_notes_indicator(ids){
+  jQuery(document).ready(function() {
+	jQuery(".indicator-has-no-notes").each(function(){
+	  if (ids.indexOf(parseInt(this.id)) != -1){
+	    jQuery(this).attr("class","indicator-has-notes");
+	  }
+	});
+   });
+}
