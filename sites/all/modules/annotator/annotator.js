@@ -1,4 +1,4 @@
-function init(name, bilag_id) {
+function init(name, meeting_id, bullet_point_id, bilag_id) {
     jQuery(document).ready(function() {
 	jQuery('#content').annotator().annotator('addPlugin', 'Touch', {
 	  force: location.search.indexOf('force') > -1,
@@ -9,14 +9,18 @@ function init(name, bilag_id) {
 	
 	jQuery('#content').annotator().annotator('addPlugin', 'Store', {
 	  // The endpoint of the store on your server.
-	  prefix: 'http://192.168.42.179:5000/',
+	  prefix: 'http://192.168.1.102:5000/',
 	  annotationData: {
              'drupal_user': name,
-	     'bilag_id': bilag_id
+	     'bilag_id': bilag_id,
+	     'bullet_point_id': bullet_point_id,
+	     'meeting_id': meeting_id
 	  },
 	  loadFromSearch: {
 	     'drupal_user': name,
-	     'bilag_id': bilag_id
+	     'bilag_id': bilag_id,
+	     'bullet_point_id': bullet_point_id,
+	     'meeting_id': meeting_id
           }
 	});
  	

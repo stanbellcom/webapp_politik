@@ -1,49 +1,122 @@
 <?php
 
+include(drupal_get_path('module', 'annotator').'/annotator.common.inc');
+include(drupal_get_path('theme', 'syddjurs_omega_subtheme').'/include/common_functions.inc');
+
 /**
  * Implements hook_menu().
  */
 function annotator_menu() {
   $items = array();
-
-  $items['annotator/test'] = array(
-    'title' => 'Drupal 7 test pager',
+  
+  $items['meeting/%/bullet-point/%/bullet-point-attachment/%'] = array(
+    'title' => 'Bilag',
     'type' => MENU_CALLBACK,
-    'page callback' => '_annotator_callback',
-    'access arguments' => array('access content')
+    'page callback' => '_annotator_view',
+    'access arguments' => array(1,3,5),
+    'access callback' => '_annotator_check_permission', 
+    'page arguments' => array(1,3,5)
   );
+  
+  $items['meeting/%/bullet-point/%/bullet-point-attachment/%/print'] = array(
+    'title' => 'Bilag Print Version',
+    'type' => MENU_CALLBACK,
+    'page callback' => '_annotator_view_print',
+    'access arguments' => array(1,3,5),
+    'access callback' => '_annotator_check_permission', 
+    'page arguments' => array(1,3,5)
+  );
+
 
   return $items;
 }
 
-function _annotator_callback() {
-	drupal_add_js(drupal_get_path('module', 'annotator') . '/lib/jquery.min.js');
-	drupal_add_js(drupal_get_path('module', 'annotator') . '/lib/annotator-full.min.js');
-	drupal_add_js(drupal_get_path('module', 'annotator') . '/lib/touch-plugin/annotator.touch.min.js');
-	drupal_add_js(drupal_get_path('module', 'annotator') . '/annotator.js');
-	global $user;
-	drupal_add_js('init("'.$user->name.'");', 'inline');
-
-	drupal_add_css(drupal_get_path('module', 'annotator') . '/lib/touch-plugin/annotator.touch.css');
-	drupal_add_css(drupal_get_path('module', 'annotator') . '/lib/annotator-full.min.css');
-
-	$text = "<p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. 
-	  He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. 
-	  The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest 
-	  of him, waved about helplessly as he looked.</p>";
-	$text.= "<p\"What's happened to me?\" he thought. It wasn't a dream. His room, a proper human room although a little too small, 
-	  lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - 
-	  and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame. 
-	  It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her 
-	  lower arm towards the viewer.</p>";
-	$text.="<p>Gregor then turned to look out the window at the dull weather. Drops of rain could be heard hitting the pane, 
-	  which made him feel quite sad. \"How about if I sleep a little bit longer and forget all this nonsense\", 
-	  he thought, but that was something he was unable to do because he was used to sleeping on his right, and in his present state 
-	  couldn't get into that position. However hard he threw himself onto his right, he always rolled back to where he was. 
-	  He must have tried it a hundred times, shut his eyes so that he wouldn't have to look at the floundering legs, and only stopped when 
-	  he began to feel a mild, dull pain there that he had never felt before.</p>";
-
-	return ('<div id="content">'.$text.'</div>');
+function _annotator_check_permission($meeting_id, $bullet_point_id, $bilag_id){
+    return check_user_can_see_bullet_point_attachment($meeting_id, $bullet_point_id, $bilag_id);
 }
+
+function _annotator_view($meeting_id, $bullet_point_id, $bilag_id) {
+	$bilag = node_load($bilag_id);
+	if (strcmp($bilag->type, 'bullet_point_attachment') == 0){
+	  //drupal_add_js(drupal_get_path('module', 'annotator') . '/lib/jquery.min.js');
+	  drupal_add_js(drupal_get_path('module', 'annotator') . '/lib/annotator-full.min.js');
+	  drupal_add_js(drupal_get_path('module', 'annotator') . '/lib/touch-plugin/annotator.touch.min.js');
+	  drupal_add_js(drupal_get_path('module', 'annotator') . '/lib/json2.js');
+  
+	  drupal_add_js(drupal_get_path('module', 'annotator') . '/annotator.js');
+	  
+	  global $user;
+	  drupal_add_js('init("'.$user->name.'","'.$meeting_id.'","'.$bullet_point_id.'","'.$bilag_id.'");', 'inline');
+  
+	  drupal_add_css(drupal_get_path('module', 'annotator') . '/lib/touch-plugin/annotator.touch.css');
+	  drupal_add_css(drupal_get_path('module', 'annotator') . '/lib/annotator-full.min.css');
+	
+	  drupal_set_title('Bilag - '.$bilag->title);
+	  $text = $bilag->field_bpa_body['und'][0]['value'];
+	}
+	$link = $GLOBALS['base_path'].'?q=/print/meeting/'.$meeting_id.'/bullet-point/'.$bullet_point_id.'/bullet-point-attachment/'.$bilag_id.'/print';
+	
+	return ('<div class="node">
+		<div class="help-button" title="Help text goes here"></div>
+		<div align="right"><input class="form-submit" type="button" onclick="window.open(\''.$link.'\')" value="Print"></div>'.
+		'<div id="content">'.$text.'</div>
+		</div>');
+}
+
+function _annotator_view_print($meeting_id, $bullet_point_id, $bilag_id) {
+	$bilag = node_load($bilag_id);
+	if (strcmp($bilag->type, 'bullet_point_attachment') == 0){
+	  
+	  drupal_set_title('Bilag - '.$bilag->title);
+	  $header = '<h3>Bilag - '.$bilag->title.'</h3>';
+	  
+	  $body = $bilag->field_bpa_body['und'][0]['value'];
+	  
+	  //getting annotations from storage
+	  $annotations = annotator_get_notes_by_attachment_id($bilag_id);
+	  
+	  //initiating variabes
+	  $annotation_list = '';
+	  $note_nr = 1;
+	  
+	  //printing annotations one by one in right order
+	  while (!empty($annotations)){
+	    //flushing array indexing
+	    $annotations = array_values($annotations);
+	    
+	    $first_note_ind = 0;
+	    for ($i=1; $i < count($annotations); $i++){
+	      if ($annotations[$i]['ranges'][0]['startOffset'] < $annotations[$first_note_ind]['ranges'][0]['startOffset'])
+		$first_note_ind = $i;
+	    }
+	    $body = _annotator_append_index($body, $annotations[$first_note_ind], $note_nr);
+	    $annotation_list .= _annotator_append_note($annotations[$first_note_ind], $note_nr);
+	    $note_nr++;
+	    
+	    unset($annotations[$first_note_ind]);
+	  }
+	  
+	  $text = $header;
+	  $text .= $body;
+	  $text .= "<hr/>";
+	  $text .= $annotation_list;
+	}
+	
+	return ('<div class="node" id="content">'.$text.'</div>');
+}
+
+function _annotator_append_index($body, $note, $note_nr){
+  $positionStart = strpos($body, $note['quote'], $note['ranges'][0]['startOffset']);
+  $positionEnd = $positionStart+strlen($note['quote']);
+  $body = substr_replace($body, '<sup><b>['.$note_nr.']</b></sup>', $positionEnd, 0);
+  
+  return $body;
+}
+
+function _annotator_append_note($note, $index){
+  return '<b>['.$index.']</b> '.$note['text'].'<br/>';
+}
+
+
 ?>
 

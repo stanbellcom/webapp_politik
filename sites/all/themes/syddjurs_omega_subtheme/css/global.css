@@ -38,7 +38,7 @@
     background-size: 100% 100%;
 }
 
-#section-content{
+body{
     /* W3C */
     background:
     url('../body_imgs/img_body_elipse.png') no-repeat top left,
@@ -70,6 +70,17 @@
     -o-linear-gradient(top, #f5f5f5, #e7e7e7);
     
     background-size: 80% 100%;
+    background-attachment: fixed;
+}
+
+#region-footer-first,
+#region-postscript-first{
+    min-height: 40px;
+}
+
+#region-footer-first{
+    background: url('../footer_logo.png') no-repeat center 5px;
+    border-top: 1px solid #e5e5e5;
 }
 
 .zone-branding-wrapper{
@@ -86,6 +97,11 @@
 /*Fixing the size of the textfields of Search on the front page*/
 .form-text{
     width: 150px;
+}
+
+/*Fixing user login screen*/
+#user-login-form{
+    padding: 5px 10px 5px 10px;   
 }
 
 /*---------------------------- Small Fixes End ----------------------------*/
@@ -234,7 +250,7 @@ ul li.leaf {
 
 /*---------------------------- Sidepane menu End ----------------------------*/
 
-/*---------------------------- Help buttons Start ----------------------------*/
+/*---------------------------- Indicator Icons Start ----------------------------*/
 .help-button{
     position: absolute;
     min-width: 30px;
@@ -245,7 +261,51 @@ ul li.leaf {
     background: url('../icon_help.png') no-repeat 50% top;
 }
 
-/*---------------------------- Help buttons End ----------------------------*/
+.indicator-has-notes{
+    position: relative;
+    float:left;
+    background: url('../icon_note.png') no-repeat 50% top;
+    min-width: 16px;
+    min-height: 16px;
+    width: 16px;
+    height: 16px;
+    padding-right:5px;
+}
+
+.indicator-has-speaker-paper{
+    position: relative;
+    float:left;
+    background: url('../icon_speaker_paper.png') no-repeat 50% center;
+    min-width: 16px;
+    min-height: 16px;
+    width: 16px;
+    height: 16px;
+    padding-right:5px;
+}
+
+.indicator-create-speaker-paper{
+    position: relative;
+    float:left;
+    background: url('../icon_create_speaker_paper.png') no-repeat 50% top;
+    min-width: 16px;
+    min-height: 16px;
+    width: 16px;
+    height: 16px;
+    padding-right:5px;
+}
+
+.indicator-unlocked{
+    position: relative;
+    float:left;
+    background: url('../icon_unlocked.png') no-repeat 50% 50%;
+    min-width: 16px;
+    min-height: 16px;
+    width: 16px;
+    height: 16px;
+    padding-right:5px;
+}
+
+/*---------------------------- Indicator Icons End ----------------------------*/
 
 /*---------------------------- User logout Start ----------------------------*/
 div.user-logout-block{
@@ -269,47 +329,29 @@ div.user-logout-block{
     padding: 5px 10px 5px 10px;
 }
 
-.user-logout-btn a{
+.user-logout-btn {
     /* fallback */
-    background: url('../icon_log_out.png') no-repeat 5px 50%, linear-gradient(top, #fcfcfc 0%,#c0c0c0 100%);
+    background: url('../icon_log_out.png') no-repeat 5px 50%, linear-gradient(top, #fcfcfc 0%,#c0c0c0 100%) !important;
     /* Safari 4-5, Chrome 1-9 */
-    background: url('../icon_log_out.png') no-repeat 5px 50%, -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e7e7e7), to(#c0c0c0));
+    background: url('../icon_log_out.png') no-repeat 5px 50%, -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e7e7e7), to(#c0c0c0)) !important;
     /* Safari 5.1, Chrome 10+ */
-    background: url('../icon_log_out.png') no-repeat 5px 50%, -webkit-linear-gradient(top, #fcfcfc, #c0c0c0);
+    background: url('../icon_log_out.png') no-repeat 5px 50%, -webkit-linear-gradient(top, #fcfcfc, #c0c0c0) !important;
     /* Firefox 3.6+ */
-    background: url('../icon_log_out.png') no-repeat 5px 50%, -moz-linear-gradient(top, #fcfcfc, #c0c0c0);
+    background: url('../icon_log_out.png') no-repeat 5px 50%, -moz-linear-gradient(top, #fcfcfc, #c0c0c0) !important;
     /* IE 10 */
-    background: url('../icon_log_out.png') no-repeat 5px 50%, -ms-linear-gradient(top, #fcfcfc, #c0c0c0);
+    background: url('../icon_log_out.png') no-repeat 5px 50%, -ms-linear-gradient(top, #fcfcfc, #c0c0c0) !important;
     /* Opera 11.10+ */
-    background: url('../icon_log_out.png') no-repeat 5px 50%, -o-linear-gradient(top, #fcfcfc, #c0c0c0);
+    background: url('../icon_log_out.png') no-repeat 5px 50%, -o-linear-gradient(top, #fcfcfc, #c0c0c0) !important;
     
-    border-color: #b9b9b9 #b9b9b9 #BBBBBB;
-    border-radius: 7px;
-    border-style: solid;
-    border-width: 1px;
-    
-    color: #333333;
-    padding: 6px 10px 5px 30px;
-    text-shadow: 0 1px 0 #EEEEEE;
+    padding: 5px 10px 5px 30px !important;
 }
-
-.user-logout-btn a:link,  .user-logout-btn a:visited{
-    color: #323232;
-    text-shadow:1px 1px #f5f5f5;
-    font-family:Arial,Helvetica,sans-serif;
-    font-weight:100;
-    font-size: 12px;
-    text-decoration: none;
-    text-transform:uppercase;
-}
-
 
 /*---------------------------- User logout End ----------------------------*/
 
 
 /*---------------------------- Views Start ----------------------------*/
 
-div.attachment .view-header h3{
+.view-header h3{
     color: #323232;
     text-shadow:1px 1px #f5f5f5;
     text-transform:uppercase;
@@ -319,13 +361,18 @@ div.attachment .view-header h3{
     
     background-color: #dedede;
     padding: 5px;
+    margin-top: 5px;
+}
+
+.views-exposed-form .views-exposed-widget .form-submit {
+    margin-top: 0;
 }
 
 div.date-heading h3 a, div.date-heading h3{
     color: #323232;
     text-decoration: none;
     font-family:Arial,Helvetica,sans-serif;
-    font-size: 20px;
+    background: none;
 }
 
 .view-id-events,
@@ -334,6 +381,7 @@ div.date-heading h3 a, div.date-heading h3{
 .view-id-kommende_m_der_i_mine_udvalg,
 .view-id-seneste_8_m_der_i_de_st_ende_politiske_udvalg_,
 .views-exposed-form,
+#user-login-form,
 .node,
 div[class*="view-display-id-page"]  {
     border-left: 1px solid;
@@ -418,7 +466,6 @@ div.block-inner{
 
 .view .date-nav-wrapper .date-prev {
     float: none;
-    font-size: 12px;
     left: 10px;
     padding: 0px;
     position: absolute;
@@ -436,7 +483,6 @@ div.block-inner{
 
 .view .date-nav-wrapper .date-next {
     float: none;
-    font-size: 12px;
     padding: 0px;
     position: absolute;
     right: 0;
@@ -453,11 +499,15 @@ div.block-inner{
 
 .view .date-nav-wrapper .date-prev a, .view .date-nav-wrapper .date-next a {
     color: inherit;
-    font-size: 15px;
+    font-size: 16px !important;
     text-decoration: none;
 }
 
-.calendar-calendar .mini tr td.today, .calendar-calendar .mini tr.odd td.today, .calendar-calendar .mini tr.even td.today, .calendar-calendar .mini tr td.today a {
+.calendar-calendar tr td.today, .calendar-calendar tr.odd td.today, .calendar-calendar tr.even td.today {
+    background: none;
+}
+
+.calendar-calendar .mini tr td.today a {
     background-color: #790056;
     color: #feffff;
     font-weight: bold;
@@ -511,7 +561,7 @@ div.block-inner{
 /*---------------------------- Omega globals override START ----------------------------*/
 a:link, a:visited {
     color: #790056;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 p, dl, hr, h1, h2, h3, h4, h5, h6, ol, ul, pre, table, address, fieldset {
@@ -547,11 +597,11 @@ p, dl, hr, h1, h2, h3, h4, h5, h6, ol, ul, pre, table, address, fieldset {
     border-right: none;
 }
 
-.form-submit, .view .date-nav-wrapper .date-next a,  .view .date-nav-wrapper .date-prev a{
+.form-submit, .view .date-nav-wrapper .date-next a,  .view .date-nav-wrapper .date-prev a, .button{
     /* fallback */
     background: linear-gradient(top, #fcfcfc 0%,#c0c0c0 100%);
     /* Safari 4-5, Chrome 1-9 */
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e7e7e7), to(#c0c0c0));
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#c0c0c0));
     
     /* Safari 5.1, Chrome 10+ */
     background: -webkit-linear-gradient(top, #fcfcfc, #c0c0c0);
@@ -570,10 +620,22 @@ p, dl, hr, h1, h2, h3, h4, h5, h6, ol, ul, pre, table, address, fieldset {
     border-style: solid;
     border-width: 1px;
     
-    color: #333333;
+    color: #333333 !important;
     text-shadow: 0 1px 0 #EEEEEE;
     
     padding: 5px 10px 5px 10px;
+    
+    text-shadow:1px 1px #f5f5f5;
+    font-family:Arial,Helvetica,sans-serif;
+    font-weight:100;
+    font-size: 13px;
+    text-decoration: none;
+    text-transform:uppercase;
+}
+
+.item-list ul {
+    margin: 0.75em 0.75em 0.75em;
+    padding: 0;
 }
 /*----------------------------Omega globals override END----------------------------*/
 
@@ -629,10 +691,10 @@ ul.primary li.active a {
 table {
   border: 0;
   border-spacing: 0;
-  font-size: 0.857em;
   margin: 0px 0;
   width: 100%;
 }
+
 table table {
   font-size: 1em;
 }
@@ -645,12 +707,73 @@ table tr th {
   border-bottom-style: none;
   border-top-style: none;
 }
+
 table tr th,
 table tr th a,
 table tr th a:hover {
   color: #FFF;
   font-weight: bold;
 }
+
+/*style 1*/
+/*table tr td a,*/
+/*table tr td a:hover {*/
+/*    display: block;*/
+/*    border-radius: 7px;*/
+/*  */
+/*    background: linear-gradient(top, #fcfcfc 0%,#c0c0c0 100%);*/
+/*    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#c0c0c0));*/
+/*    */
+/*    background: -webkit-linear-gradient(top, #fcfcfc, #c0c0c0);*/
+/*    */
+/*    background: -moz-linear-gradient(top, #fcfcfc, #c0c0c0);*/
+/*    */
+/*    background: -ms-linear-gradient(top, #fcfcfc, #c0c0c0);*/
+/*    */
+/*    background: -o-linear-gradient(top, #fcfcfc, #c0c0c0);*/
+/*    */
+/*    border-color: #b9b9b9 #b9b9b9 #BBBBBB;*/
+/*    border-style: solid;*/
+/*    border-width: 1px;*/
+/*    */
+/*    color: #333333 !important;*/
+/*    */
+/*    padding: 5px 10px 5px 10px;*/
+/*    */
+/*    font-family:Arial,Helvetica,sans-serif;*/
+/*    font-weight:bold;*/
+/*    font-size: 13px;*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*td, th {*/
+/*    padding: 4px 0px 4px 0px;*/
+/*    vertical-align: middle;*/
+/*}*/
+
+/*style 2*/
+table tr td a,
+table tr td a:hover {
+    display: block;
+
+    background-color: #F0EDFF;
+    text-shadow: #FFFFFF 0 -1px 1px;
+
+    color: #333333 !important;
+
+    padding: 5px 10px 5px 10px;
+    
+    font-family:Arial,Helvetica,sans-serif;
+    font-weight:bold;
+    font-size: 13px;
+    text-decoration: none;
+}
+td, th {
+    padding: 0px 0px 0px 0px;
+    vertical-align: middle;
+}
+
+
 table tbody tr th {
   vertical-align: top;
 }
@@ -667,14 +790,15 @@ tr th {
   border-color: #555;
   border-color: rgba(255, 255, 255, 0.18);
 }
-tr.odd {
-  background: #e4e4e4;
-  background: rgba(0, 0, 0, 0.105);
+tr.odd, tr.odd td{
+  background: none; 
+  /*background: rgba(0, 0, 0, 0.105);*/
 }
-tr.even {
-  background: #efefef;
-  background: rgba(0, 0, 0, 0.063);
+tr.even, tr.even td {
+  background: none;
+  /*background: rgba(0, 0, 0, 0.063);*/
 }
+
 table ul.links {
   margin: 0;
   padding: 0;

@@ -192,7 +192,10 @@ function print_meetings_generate_month($from_month, $to_month, $meetings){
           //filling with the content
           foreach ($meetings as $met){
               if (substr($met->field_date['und'][0]['value'], 0,10) === date('Y-m-d',mktime(0, 0, 0, $month, $i, date("Y")))){
-                  $html .= $met->field_meeting_abbr['und'][0]['value'].", ";
+                 if (!empty($met->field_meeting_abbr['und'][0]['value']))
+	                  $html .= $met->field_meeting_abbr['und'][0]['value'].", ";
+                  else 
+			  $html .= $met->title.", ";
               }
           }
           //end of content
